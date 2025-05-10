@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
+
     testImplementation libs.groovy
 
     testImplementation libs.spock.core
