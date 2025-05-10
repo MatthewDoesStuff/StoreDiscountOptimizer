@@ -1,0 +1,35 @@
+plugins {
+    id 'com.gradleup.shadow' version '8.3.6'
+    id 'groovy'
+    id 'application'
+    id 'io.freefair.lombok' version '8.13.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation libs.groovy
+
+    testImplementation libs.spock.core
+    testImplementation libs.junit
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation libs.guava
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'org.example.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
