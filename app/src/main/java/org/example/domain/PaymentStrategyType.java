@@ -1,0 +1,8 @@
+package org.example.domain;
+
+public enum PaymentStrategyType {
+    FULL_CARD_WITH_PROMOTION,
+    FULL_POINTS_OWN_DISCOUNT,
+    PARTIAL_POINTS_10_PERCENT_GLOBAL_DISCOUNT,
+    FULL_PAYMENT_NO_PROMOTION
+}
