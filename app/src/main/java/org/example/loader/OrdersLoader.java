@@ -26,7 +26,7 @@ public class OrdersLoader {
             throw new IOException("File not found or it's not a file: " + filePath);
         }
 
-        List<RawOrder> rawOrders = objectMapper.readValue(file, new TypeReference<List<RawOrder>>() {});
+        List<RawOrder> rawOrders = objectMapper.readValue(file, new TypeReference<>() {});
         return rawOrders.stream()
                 .map(rawOrder -> transformToOrder(rawOrder, availablePaymentMethods))
                 .collect(Collectors.toList());

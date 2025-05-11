@@ -25,7 +25,7 @@ public class PaymentMethodsLoader {
             throw new IOException("File not found or it's not a file: " + filePath);
         }
 
-        List<RawPaymentMethod> rawPaymentMethods = objectMapper.readValue(file, new TypeReference<List<RawPaymentMethod>>() {});
+        List<RawPaymentMethod> rawPaymentMethods = objectMapper.readValue(file, new TypeReference<>() {});
 
         return rawPaymentMethods.stream()
                 .map(this::transformToPaymentMethod)

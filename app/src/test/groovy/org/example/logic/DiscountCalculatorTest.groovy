@@ -7,7 +7,7 @@ import org.example.domain.PaymentStrategyType
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import java.math.RoundingMode;
+import java.math.RoundingMode
 
 
 class DiscountCalculatorTest extends Specification {

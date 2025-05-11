@@ -4,7 +4,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import java.math.BigDecimal
-import java.math.RoundingMode;
+import java.math.RoundingMode
 
 
 class PaymentMethodTest extends Specification {
