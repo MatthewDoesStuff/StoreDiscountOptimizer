@@ -15,6 +15,9 @@ public class PaymentMethod {
     private BigDecimal currentLimit;
 
     public PaymentMethod(String id, BigDecimal discountPercentage, BigDecimal methodLimit) {
+        if(methodLimit.scale() > 2) {
+            throw new IllegalArgumentException("Method limit cannot have more than 2 decimal places: " + methodLimit);
+        }
         this.id = id;
         this.discountPercentage = discountPercentage;
         this.methodLimit = methodLimit.setScale(2, RoundingMode.HALF_UP);
