@@ -35,10 +35,6 @@ public class PaymentMethodsLoader {
     }
 
     private PaymentMethod transformToPaymentMethod(RawPaymentMethod rawPaymentMethod) {
-
-//        BigDecimal discount = new BigDecimal(rawPaymentMethod.discount);
-//        BigDecimal limit = new BigDecimal(rawPaymentMethod.limit);
-
         BigDecimal discount;
         try{
             discount = new BigDecimal(rawPaymentMethod.discount);
@@ -62,10 +58,5 @@ public class PaymentMethodsLoader {
         public String limit;
 
         public RawPaymentMethod(){}
-//        public RawPaymentMethod(String id, String discount, String limit) {
-//            this.id = id;
-//            this.discount = discount;
-//            this.limit = limit;
-//        }
     }
 }
