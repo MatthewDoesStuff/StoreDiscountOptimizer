@@ -6,7 +6,7 @@ import java.util.List;
 
 public record Order(String id, BigDecimal value, List<PaymentMethod> applicablePromotions) {
     public Order{
-        if (value.compareTo(BigDecimal.ZERO) <= 0) {
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Order value cannot be a negative number " + value);
         }
         if(value.scale() > 2) {
