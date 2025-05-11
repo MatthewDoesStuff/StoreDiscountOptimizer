@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
-
 public class OrdersLoader {
     private final ObjectMapper objectMapper;
 
@@ -64,10 +62,5 @@ public class OrdersLoader {
         public List<String> promotions;
 
         public RawOrder() {}
-//        public RawOrder(String id, String value, List<String> promotions) {
-//            this.id = id;
-//            this.value = value;
-//            this.promotions = promotions;
-//        }
     }
 }
