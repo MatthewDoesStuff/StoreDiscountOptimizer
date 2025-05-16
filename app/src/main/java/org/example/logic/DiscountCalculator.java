@@ -24,13 +24,19 @@ public class DiscountCalculator {
                                             .collect(Collectors.toList());
     }
 
-
-
-
     public List<CalculatedPaymentOption> calculateOptionsForOrder(Order order) {
         List<CalculatedPaymentOption> options = new ArrayList<>();
         BigDecimal originalValue = order.value();
 
+        cardWithPromotion(options, order, originalValue);
+        fullPointsPayment(options, order, originalValue);
+        minTenPctPointsPayment(options, order, originalValue);
+        fullCardPaymentNoPromotion(options, order, originalValue);
+
+        return options.stream().distinct().collect(Collectors.toList());
+    }
+
+    private void cardWithPromotion(List<CalculatedPaymentOption> options, Order order, BigDecimal originalValue) {
         for(PaymentMethod promoCard : order.applicablePromotions()){
             if(promoCard.isPoints()){ continue; }
 
@@ -47,7 +53,9 @@ public class DiscountCalculator {
                     PaymentStrategyType.FULL_CARD_WITH_PROMOTION,
                     spent));
         }
+    }
 
+    private void fullPointsPayment(List<CalculatedPaymentOption> options, Order order, BigDecimal originalValue){
         if(pointsPaymentMethod != null){
             BigDecimal pointsOwnDiscountPercent = pointsPaymentMethod.getDiscountPercentage();
             BigDecimal discountMultiplier = BigDecimal.ONE.subtract(pointsOwnDiscountPercent.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP));
@@ -62,7 +70,9 @@ public class DiscountCalculator {
                     PaymentStrategyType.FULL_POINTS_OWN_DISCOUNT,
                     spent));
         }
+    }
 
+    private void minTenPctPointsPayment(List<CalculatedPaymentOption> options, Order order, BigDecimal originalValue){
         if (pointsPaymentMethod != null) {
             BigDecimal minPointsToActivateDiscount = originalValue.multiply(new BigDecimal("0.10")).setScale(2, RoundingMode.HALF_UP);
             BigDecimal finalPriceWithGlobal10PctDiscount = originalValue.subtract(minPointsToActivateDiscount);
@@ -100,6 +110,9 @@ public class DiscountCalculator {
                 }
             }
         }
+    }
+
+    private void fullCardPaymentNoPromotion(List<CalculatedPaymentOption> options, Order order, BigDecimal originalValue){
         for (PaymentMethod card : clientCardPaymentMethods) {
             Map<PaymentMethod, BigDecimal> spent = new HashMap<>();
             spent.put(card, originalValue);
@@ -111,7 +124,5 @@ public class DiscountCalculator {
                     spent
             ));
         }
-
-        return options.stream().distinct().collect(Collectors.toList());
     }
 }
